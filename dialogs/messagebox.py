@@ -20,12 +20,14 @@ import os
 __version__ = "1.0"
 
 
-class TXInputBox(simpledialog.Dialog):
+class TXMessageBox(simpledialog.Dialog):
     """A simple dialog with a text message.
     """
-    def __init__(self, parent, title=None, text=None, size=None, button1="Ok", button2="Cancel", button3=None, buttonWidth=10, defaultButton=1):
+    def __init__(self, parent, title=None, text=None, size=None, button1="Ok", button2="Cancel", button3=None, imageFilename = "dragon-logo.png", buttonWidth=10, defaultButton=1):
         """Initialize the dialog.
         After dialog has been closed the result attribute contains the value of the button pressed.
+        In this version the image shall be next to the script file.
+        TODO: imageFilename shall be changed to imageFilepath.
 
         Arguments:
         ----------
@@ -36,6 +38,7 @@ class TXInputBox(simpledialog.Dialog):
             button1 -- the text of the first button \n
             button2 -- the text of the second button \n
             button3 -- the text of the third button \n
+            imageFilename -- the filename of the logo image \n
             buttonWidth -- the width of the buttons
         """
         self.text    = text
@@ -49,7 +52,7 @@ class TXInputBox(simpledialog.Dialog):
         self.defaultButton = defaultButton
 
         # Setup the hardcoded logo image
-        self.logoFile  = os.path.join(os.path.dirname(__file__), "dragon-logo.png")
+        self.logoFile  = os.path.join(os.path.dirname(__file__), )
         self.logoSize  = (50, 50)
         self.logoImage = Image.open(self.logoFile)
         self.logo = self.logoImage.resize(self.logoSize, resample=Image.Resampling.LANCZOS)
@@ -128,15 +131,15 @@ if __name__ == '__main__':
 
     # Show a simple message dialog
     longMessage = ['Hey User!', 'This is a long message. It is displayed in a dialog.', 'You can use it to display important information.']
-    dialog = TXInputBox(root, title="Message", text="\n".join(longMessage), button2=None, button3=None)
+    dialog = TXMessageBox(root, title="Message", text="\n".join(longMessage), button2=None, button3=None)
     print("Dialog closed by button{}".format(dialog.result))
 
     # Show a dialog with two buttons (Yes/No question)
     longMessage = ['You are about to exit the program', '', 'Are you sure to continue?']
-    dialog = TXInputBox(root, title="Exit...", text="\n".join(longMessage), button1="Yes", button2="No", defaultButton=2)
+    dialog = TXMessageBox(root, title="Exit...", text="\n".join(longMessage), button1="Yes", button2="No", defaultButton=2)
     print("Dialog closed by button{}".format(dialog.result))
 
     # Show a dialog with three buttons
     longMessage = ['The file already exists!', '', 'Would you like to update the file?']
-    dialog = TXInputBox(root, title="Save file...", text="\n".join(longMessage), button1="Yes", button2="No", button3="Save as", defaultButton=3)
+    dialog = TXMessageBox(root, title="Save file...", text="\n".join(longMessage), button1="Yes", button2="No", button3="Save as", defaultButton=3)
     print("Dialog closed by button{}".format(dialog.result))

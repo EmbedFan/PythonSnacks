@@ -17,6 +17,8 @@ from tkinter import simpledialog
 from PIL import Image, ImageTk
 import os
 
+__version__ = "1.0"
+
 
 class TXInputBox(simpledialog.Dialog):
     """A simple dialog with a text message.
@@ -138,7 +140,3 @@ if __name__ == '__main__':
     longMessage = ['The file already exists!', '', 'Would you like to update the file?']
     dialog = TXInputBox(root, title="Save file...", text="\n".join(longMessage), button1="Yes", button2="No", button3="Save as", defaultButton=3)
     print("Dialog closed by button{}".format(dialog.result))
-
-
-
-
